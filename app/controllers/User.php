@@ -8,4 +8,12 @@ class User extends Controller {
         $this->view('user/index', $data);
         $this->view('templates/footer');
     }
+
+    public function detail($id){
+        $data['title'] = 'User Detail';
+        $data['auser'] = $this->model('User_model')->getUserById($id);
+        $this->view('templates/header', $data);
+        $this->view('user/detail', $data);
+        $this->view('templates/footer');
+    }
 }
