@@ -28,6 +28,3 @@
         </div>
     </div>
     </nav>
-
-    <!-- testing -->
-    <!-- testing2 -->

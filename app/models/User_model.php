@@ -1,25 +1,25 @@
 <?php
 
 class User_model {
-    private $auser = [
-        [
-            "name" => "John Doe",
-            "email" => "johndoe@gmail.com",
-            "user_type" => "Admin"
-        ],
-        [
-            "name" => "Guy Fawkes",
-            "email" => "guy fawkes@hotmail.com",
-            "user_type" => "Editor"
-        ],
-        [
-            "name" => "Julian Asange",
-            "email" => "julianasange@protonmail.com",
-            "user_type" => "Contributor"
-        ]
-    ];
+
+    private $dbh; //database handler
+    private $stmt;
+
+    public function __construct(){
+        //data source name
+        $dsn = 'mysql:host=localhost;dbname=mvc';
+
+        try{
+            $this->dbh = new PDO($dsn, 'root', 'root');
+        } catch(PDOException $e){
+            die($e->getMessage());
+        }
+    }
+
 
     public function getUser(){
-        return $this->auser;
+        $this->stmt = $this->dbh->prepare('SELECT * FROM user');
+        $this->stmt->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
